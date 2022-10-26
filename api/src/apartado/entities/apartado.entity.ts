@@ -1,4 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+
+@Entity('apartado')
 export class Apartado {
 
     @PrimaryGeneratedColumn()

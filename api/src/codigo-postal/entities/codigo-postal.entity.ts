@@ -57,9 +57,11 @@ export class CodigoPostal {
     @Column({default: ''})
     DesignacaoPostal: string;  
 
+    /*
     @Column({default: ''})
     NomeConcelho: string;
 
     @Column({default: ''})
     NomeDistrito: string;
+    */
 }

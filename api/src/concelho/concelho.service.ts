@@ -35,7 +35,7 @@ export class ConcelhoService {
           'Codigo', 
           'CodigoDistrito',
           'Nome', 
-          'NomeDistrito'
+          //'NomeDistrito'
       ],
       where: {
           Id: id,

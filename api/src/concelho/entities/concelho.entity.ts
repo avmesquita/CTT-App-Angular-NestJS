@@ -15,6 +15,6 @@ export class Concelho {
     @Column({default: ''})
     Nome: string;  
 
-    @Column({default: ''})
-    NomeDistrito: string;
+    //@Column({default: ''})
+    //NomeDistrito: string;
 }
