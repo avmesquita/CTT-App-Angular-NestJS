@@ -5,5 +5,7 @@ Este projeto tem como característica usar parte do projeto avmesquita/CTT-Api e
 Swagger => /swagger
 Simple Get Controller To Tests => /api/hello-word
 
-
-
+Apartado      => /api/apartado
+Codigo Postal => /api/codigo-postal
+Concelho      => /api/concelho
+Distrito      => /api/distrito
