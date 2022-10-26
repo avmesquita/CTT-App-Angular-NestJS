@@ -12,6 +12,10 @@ async function bootstrap() {
   .setContact('Andre Mesquita','https://andremesquita.com','')
   .setExternalDoc('Documentação do Projeto', 'https://andremesquita.com/ctt-app')
   .setVersion('1.0')  
+  .addTag('apartado')
+  .addTag('codigo-postal')
+  .addTag('concelho')  
+  .addTag('distrito')
   .build();
 
   const document = SwaggerModule.createDocument(app, config);

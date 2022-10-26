@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CodigoPostalService } from './codigo-postal.service';
 import { CreateCodigoPostalDto } from './dto/create-codigo-postal.dto';
 import { UpdateCodigoPostalDto } from './dto/update-codigo-postal.dto';
 
+@ApiTags('codigo-postal')
 @Controller('codigo-postal')
 export class CodigoPostalController {
   constructor(private readonly codigoPostalService: CodigoPostalService) {}
