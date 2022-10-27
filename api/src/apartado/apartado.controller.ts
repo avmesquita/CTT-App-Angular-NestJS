@@ -10,22 +10,22 @@ export class ApartadoController {
   constructor(private readonly apartadoService: ApartadoService) {}
 
   @Post()
-  create(@Body() createApartadoDto: CreateApartadoDto) {
+  async create(@Body() createApartadoDto: CreateApartadoDto) {
     return this.apartadoService.create(createApartadoDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.apartadoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.apartadoService.findOne(+id);
   }
 
   @Get('paginate/:page/:limit')
-  paginate(
+  async paginate(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10
   ) {
@@ -40,12 +40,12 @@ export class ApartadoController {
 
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApartadoDto: UpdateApartadoDto) {
+  async update(@Param('id') id: string, @Body() updateApartadoDto: UpdateApartadoDto) {
     return this.apartadoService.update(+id, updateApartadoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.apartadoService.remove(+id);
   }
 }

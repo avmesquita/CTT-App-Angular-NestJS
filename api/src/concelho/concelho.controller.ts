@@ -10,22 +10,22 @@ export class ConcelhoController {
   constructor(private readonly concelhoService: ConcelhoService) {}
 
   @Post()
-  create(@Body() createConcelhoDto: CreateConcelhoDto) {
+  async create(@Body() createConcelhoDto: CreateConcelhoDto) {
     return this.concelhoService.create(createConcelhoDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.concelhoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.concelhoService.findOne(+id);
   }
 
   @Get('paginate/:page/:limit')
-  paginate(
+  async paginate(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10
   ) {
@@ -40,12 +40,12 @@ export class ConcelhoController {
 
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateConcelhoDto: UpdateConcelhoDto) {
+  async update(@Param('id') id: string, @Body() updateConcelhoDto: UpdateConcelhoDto) {
     return this.concelhoService.update(+id, updateConcelhoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.concelhoService.remove(+id);
   }
 }
