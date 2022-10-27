@@ -1,11 +1,17 @@
-# CTT-App-Firebase
-Este projeto tem como característica usar parte do projeto avmesquita/CTT-Api e criar uma nova aplicação NestJS com Angular, a ser publicada na Firebase.
+# CTT App
 
-* Paths
-Swagger => /swagger
-Simple Get Controller To Tests => /api/hello-word
+## Definição
+* Criar um projeto de backend REST API com NestJS
+* Criar um projeto de frontend com ANGULAR a consumir o backend
+* Publicar o aplicativo na Firebase
 
-Apartado      => /api/apartado
-Codigo Postal => /api/codigo-postal
-Concelho      => /api/concelho
-Distrito      => /api/distrito
+## Backend Endpoints
+* Swagger       => /swagger
+  -----------------------------------
+* Apartado      => /api/apartado
+* Codigo Postal => /api/codigo-postal
+* Concelho      => /api/concelho
+* Distrito      => /api/distrito
+  -----------------------------------
+* Test          => /api
+
