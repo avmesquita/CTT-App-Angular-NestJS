@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Header } from '@nestjs/common';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { CodigoPostalService } from './codigo-postal.service';
 import { CreateCodigoPostalDto } from './dto/create-codigo-postal.dto';
 import { UpdateCodigoPostalDto } from './dto/update-codigo-postal.dto';
@@ -44,9 +44,9 @@ export class CodigoPostalController {
 
   @Get('cp/:cp/:ext')
   @Header('Cache-Control', 'none')
-  async free(
+  async cpext(
     @Query('cp') cp: string,
-    @Query('ext') ext: string = ''
+    @Query('ext') ext?: string
   ) {    
     return this.codigoPostalService.findCP(cp,ext);
   }
