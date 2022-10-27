@@ -1,3 +1,4 @@
+import { CodigoPostal } from "src/codigo-postal/entities/codigo-postal.entity";
 import { Concelho } from "src/concelho/entities/concelho.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable } from "typeorm";
 
@@ -11,5 +12,8 @@ export class Distrito {
     Codigo: string;
 
     @Column({default: ''})
-    Nome: string;  
+    Nome: string;
+
+    @OneToMany(type => Concelho, concelho => concelho.Distrito, { cascade: false, nullable: true })
+    concelhos: Concelho[];
 }

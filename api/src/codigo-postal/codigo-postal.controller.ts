@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CodigoPostalService } from './codigo-postal.service';
 import { CreateCodigoPostalDto } from './dto/create-codigo-postal.dto';
@@ -23,6 +23,21 @@ export class CodigoPostalController {
   findOne(@Param('id') id: string) {
     return this.codigoPostalService.findOne(+id);
   }
+
+  @Get('paginate/:page/:limit')
+  paginate(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10
+  ) {
+    limit = limit > 100 ? 100 : limit;        
+
+    return this.codigoPostalService.paginateAll({
+        limit: Number(limit),
+        page: Number(page),
+        route: 'http://localhost:3000/api/codigo-postal/paginate'
+    })
+  }
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCodigoPostalDto: UpdateCodigoPostalDto) {
