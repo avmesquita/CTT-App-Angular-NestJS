@@ -1,0 +1,50 @@
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.spacer {
+  flex: 1;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-line {
+  font-weight:400;
+  color:white;
+}
+
+.menu-home {  
+  color:white;  
+  font-weight: bolder;
+  font-size: xx-large;
+  margin-top: -10px;
+  margin-left: 20px;
+}
+
+.content {
+  display: flex;
+  margin: 0 auto 32px;
+  padding: 20px;
+  align-items: center;
+  overflow: hidden;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
