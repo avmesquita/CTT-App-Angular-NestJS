@@ -16,3 +16,16 @@ Projeto de aplicativo completo para consulta de códigos postais de Portugal
 
 * Test          => /api
 
+## Donating
+
+Projetos deste tipo servem-me para estudo e para contribuir de alguma forma para a comunidade.
+Desenvolvimento de software é uma paixão que tenho desde criança e é o que espero fazer até meus últimos dias.
+Se achas importante incentivar-me, podes optar por patroninar-me de forma que continue a criar softwares para a comunidade em meu tempo livre ou mesmo para a criação ou suporte de algo que seja de vosso interesse. 
+
+Se for esta opção, [Patrocínio](https://github.com/sponsors/avmesquita).
+
+Se preferes pagar-me um café: [Paypal](https://paypal.me/avmesquita)
+
+## Copyright and License
+
+Copyright © 2022 Andre Mesquita
