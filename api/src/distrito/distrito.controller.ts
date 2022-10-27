@@ -42,6 +42,13 @@ export class DistritoController {
     })
   }
 
+  @Get('find-text/:text')
+  @Header('Cache-Control', 'none')
+  async cpext(
+    @Query('text') text: string    
+  ) {    
+    return this.distritoService.findDistritoName(text);
+  }  
 
   @Patch(':id')
   @Header('Cache-Control', 'none')

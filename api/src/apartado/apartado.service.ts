@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
-import { Repository, FindOneOptions } from 'typeorm';
+import { Repository, FindOneOptions, FindManyOptions, Like } from 'typeorm';
 import { Pagination, IPaginationOptions, paginate } from 'nestjs-typeorm-paginate';
 
 import { CreateApartadoDto } from './dto/create-apartado.dto';
@@ -50,6 +50,35 @@ export class ApartadoService {
     };
     return from(this.apartadoRepository.findOne(criteria));
   }
+
+  findText(text: string): Observable<Apartado[]> {
+    const criteria: FindManyOptions<Apartado> = {
+      select: [
+        'Id', 
+        'PostalOfficeIdentification',
+        'FirstPOBox',
+        'LastPOBox',
+        'PostalCode',
+        'PostalCodeExtension',
+        'PostalName',
+        'PostalCodeSpecial',
+        'PostalCodeSpecialExtension',
+        'PostalNameSpecial'
+      ],
+      where: [
+        { PostalOfficeIdentification: Like('%' + text + '%')},
+        { FirstPOBox: Like('%' + text + '%')},
+        { LastPOBox: Like('%' + text + '%')},
+        { PostalCode: Like('%' + text + '%')},
+        { PostalCodeExtension: Like('%' + text + '%')},
+        { PostalName: Like('%' + text + '%')},
+        { PostalCodeSpecial: Like('%' + text + '%')},
+        { PostalCodeSpecialExtension: Like('%' + text + '%')},
+        { PostalNameSpecial: Like('%' + text + '%')}
+      ]
+    }
+    return from(this.apartadoRepository.find(criteria));
+  }  
 
   update(id: number, updateApartadoDto: UpdateApartadoDto): Observable<Apartado> {
     return from(this.apartadoRepository.update(id, updateApartadoDto)).pipe(

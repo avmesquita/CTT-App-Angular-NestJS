@@ -42,6 +42,14 @@ export class ConcelhoController {
     })
   }
 
+  @Get('find-text/:text')
+  @Header('Cache-Control', 'none')
+  async cpext(
+    @Query('text') text: string    
+  ) {    
+    return this.concelhoService.findConcelhoName(text);
+  }
+
   @Patch(':id')
   @Header('Cache-Control', 'none')
   async update(@Param('id') id: string, @Body() updateConcelhoDto: UpdateConcelhoDto) {

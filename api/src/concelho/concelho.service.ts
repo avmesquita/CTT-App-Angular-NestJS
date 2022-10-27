@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { from, map, Observable, switchMap } from 'rxjs';
-import { Repository, FindOneOptions } from 'typeorm';
+import { Repository, FindOneOptions, FindManyOptions, Like } from 'typeorm';
 import { CreateConcelhoDto } from './dto/create-concelho.dto';
 import { UpdateConcelhoDto } from './dto/update-concelho.dto';
 import { Concelho } from './entities/concelho.entity';
@@ -42,6 +42,19 @@ export class ConcelhoService {
     };
     return from(this.concelhoRepository.findOne(criteria));
   }
+
+  findConcelhoName(name: string): Observable<Concelho[]> {
+    const criteria: FindManyOptions<Concelho> = {
+      select: [
+        'Id',
+        'Codigo',
+        'CodigoDistrito',
+        'Nome'
+      ],
+      where: { Nome: Like('%' + name + '%')}
+    }
+    return from(this.concelhoRepository.find(criteria));
+  }  
 
   update(id: number, updateConcelhoDto: UpdateConcelhoDto): Observable<Concelho> {
     return from(this.concelhoRepository.update(id, updateConcelhoDto)).pipe(

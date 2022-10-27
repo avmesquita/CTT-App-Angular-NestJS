@@ -42,6 +42,14 @@ export class ApartadoController {
     })
   }
 
+  @Get('find-text/:text')
+  @Header('Cache-Control', 'none')
+  async cpext(
+    @Query('text') text: string    
+  ) {    
+    return this.apartadoService.findText(text);
+  }
+
   @Patch(':id')
   @Header('Cache-Control', 'none')
   async update(@Param('id') id: string, @Body() updateApartadoDto: UpdateApartadoDto) {
