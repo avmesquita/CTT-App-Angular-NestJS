@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Concelho } from "src/concelho/entities/concelho.entity";
+import { Distrito } from "src/distrito/entities/distrito.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 @Entity('codigopostal')
 export class CodigoPostal {
@@ -56,12 +58,17 @@ export class CodigoPostal {
 
     @Column({default: ''})
     DesignacaoPostal: string;  
+    
+    @ManyToOne(type => Concelho, { eager: true, cascade: false, nullable: true })
+    @JoinColumn(
+        { name: 'CodigoConcelho', referencedColumnName: 'Codigo' }
+    )    
+    Concelho: Concelho;
 
-    /*
-    @Column({default: ''})
-    NomeConcelho: string;
+    @ManyToOne(type => Distrito, { eager: true, cascade: false, nullable: true })
+    @JoinColumn(
+        { name: 'CodigoDistrito', referencedColumnName: 'Codigo' }
+    )    
+    Distrito: Distrito;
 
-    @Column({default: ''})
-    NomeDistrito: string;
-    */
 }

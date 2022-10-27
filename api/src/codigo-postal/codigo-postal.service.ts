@@ -50,10 +50,8 @@ export class CodigoPostalService {
           'NomeCliente',
           'NumeroCodigoPostal',
           'NumeroExtensaoCodigoPostal',
-          'DesignacaoPostal',
-          //'NomeConcelho',
-          //'NomeDistrito'
-        ],
+          'DesignacaoPostal'
+        ],        
         where: {
             Id: id,
         },

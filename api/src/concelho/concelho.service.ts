@@ -34,12 +34,11 @@ export class ConcelhoService {
           'Id', 
           'Codigo', 
           'CodigoDistrito',
-          'Nome', 
-          //'NomeDistrito'
-      ],
+          'Nome'          
+      ],      
       where: {
           Id: id,
-      },
+      }
     };
     return from(this.concelhoRepository.findOne(criteria));
   }

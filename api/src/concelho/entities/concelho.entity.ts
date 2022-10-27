@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Distrito } from "src/distrito/entities/distrito.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 @Entity('concelho')
 export class Concelho {
@@ -10,11 +11,14 @@ export class Concelho {
     Codigo: string;
 
     @Column({default: ''})
-    CodigoDistrito: string;
-
-    @Column({default: ''})
     Nome: string;  
 
-    //@Column({default: ''})
-    //NomeDistrito: string;
+    @Column({default: ''})
+    CodigoDistrito: string;
+
+    @ManyToOne(type => Distrito, { eager: true, cascade: false })
+    @JoinColumn(
+        { name: 'CodigoDistrito', referencedColumnName: 'Codigo' }
+    )    
+    Distrito: Distrito;
 }
