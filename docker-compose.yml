@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  # Our NestJS Api
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+      # Only build development stage from Dockerfile
+      target: development
+    # Mount our host dir to the docker container
+    # Mount api directory (./api) to (:) docker container (/application/src/app)
+    # Reflect File changes from host to container
+    volumes:
+      - ./api:/application/src/app
+      - /application/src/app/node_modules/
+    # RUN in debug mode: npm run start:debug --> Also start your vscode debugger
+    # Run in dev mode: npm run start:dev
+    command: npm run start
+    ports:
+      - 3000:3000
+  
+  # Our Angular Frontend
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+      target: development
+    command: npm run start
+    volumes:
+      - ./frontend:/application/frontend/src/app
+      - /application/frontend/src/app/node_modules
+    ports:
+      - 4200:4200
+    links:
+      - api
+

@@ -25,7 +25,7 @@ import { ConfigModule } from '@nestjs/config';
       database: './database/CTTPortugal.db3',
       autoLoadEntities: true,
       //synchronize: true,
-      logging: ["query", "error"],
+      logging: [], // TO DEBUG: [ "query", "error" ]
       entities: [        
         CodigoPostal,
         Apartado,
@@ -33,7 +33,6 @@ import { ConfigModule } from '@nestjs/config';
         Distrito
       ]
     }),
-
     CodigoPostalModule, 
     ApartadoModule, 
     ConcelhoModule, 
