@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Header } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Header } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CodigoPostalService } from './codigo-postal.service';
 import { CreateCodigoPostalDto } from './dto/create-codigo-postal.dto';
