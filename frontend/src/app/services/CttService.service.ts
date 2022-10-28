@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { MessageService } from './MessageService.service';
 import { IApartado } from 'src/app/interfaces/apartado.interface';
 import { ICodigoPostal } from 'src/app/interfaces/codigo-portal.interface';
@@ -14,17 +14,21 @@ import { environment } from 'src/environments/environment';
 export class CttService {
 
   CttResults: [];
+  apiUrl = '';
 
 constructor(
   private http: HttpClient,
   private msgService: MessageService)
   {
+    if (!environment.production) {
+      this.apiUrl = environment.apiUrl;
+    }
   }
 
   buscarDistrito(filter: string): any {
     try
     {
-      const endpoint = environment.apiUrl + '/api/v1/distrito/' + filter;
+      const endpoint = this.apiUrl + '/api/distrito/find-text/' + filter;
       return this.http.get<IDistrito[]>(endpoint);
     } catch (e) {
       this.msgService.add(e);
@@ -34,7 +38,7 @@ constructor(
   buscarConcelho(filter: string): any {
     try
     {
-      const endpoint = environment.apiUrl + '/api/v1/concelho/' + filter;
+      const endpoint = this.apiUrl + '/api/concelho/find-text/' + filter;
       return this.http.get<IConcelho[]>(endpoint);
     } catch (e) {
       this.msgService.add(e);
@@ -44,7 +48,7 @@ constructor(
   buscarCodigoPostal(filter: string): any {
     try
     {
-      const endpoint = environment.apiUrl + '/api/v1/codigopostal/' + filter;
+      const endpoint = this.apiUrl + '/api/codigo-postal/cp/' + filter;
       return this.http.get<ICodigoPostal[]>(endpoint);
     } catch (e) {
       this.msgService.add(e);
@@ -54,7 +58,7 @@ constructor(
   buscarApartado(filter: string): any {
     try
     {
-      const endpoint = environment.apiUrl + '/api/v1/apartado/' + filter;
+      const endpoint = this.apiUrl + '/api/apartado/find-text/' + filter;
       return this.http.get<IApartado[]>(endpoint);
     } catch (e) {
       this.msgService.add(e);
@@ -64,7 +68,7 @@ constructor(
   buscarMorada(filter: string): any {
     try
     {
-      const endpoint = environment.apiUrl + '/api/v1/morada/' + filter;
+      const endpoint = this.apiUrl + '/api/codigopostal/cp/' + filter;
       return this.http.get<ICodigoPostal[]>(endpoint);
     } catch (e) {
       this.msgService.add(e);

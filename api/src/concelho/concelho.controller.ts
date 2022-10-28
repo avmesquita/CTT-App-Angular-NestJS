@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Header } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ConcelhoService } from './concelho.service';
 import { CreateConcelhoDto } from './dto/create-concelho.dto';
@@ -10,24 +10,28 @@ export class ConcelhoController {
   constructor(private readonly concelhoService: ConcelhoService) {}
 
   @Post()
-  create(@Body() createConcelhoDto: CreateConcelhoDto) {
+  @Header('Cache-Control', 'none')
+  async create(@Body() createConcelhoDto: CreateConcelhoDto) {
     return this.concelhoService.create(createConcelhoDto);
   }
 
   @Get()
-  findAll() {
+  @Header('Cache-Control', 'none')
+  async findAll() {
     return this.concelhoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async findOne(@Param('id') id: string) {
     return this.concelhoService.findOne(+id);
   }
 
   @Get('paginate/:page/:limit')
-  paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+  @Header('Cache-Control', 'none')
+  async paginate(
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -38,14 +42,26 @@ export class ConcelhoController {
     })
   }
 
+  @Get('find-text/:text')
+  @Header('Cache-Control', 'none')
+  async cpext(
+    @Param('text') text: string = ''
+  ) {
+    if (text === undefined || text === 'undefined' || text === null || text === '')
+      return this.concelhoService.findAll();
+    else
+      return this.concelhoService.findConcelhoName(text);      
+  }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateConcelhoDto: UpdateConcelhoDto) {
+  @Header('Cache-Control', 'none')
+  async update(@Param('id') id: string, @Body() updateConcelhoDto: UpdateConcelhoDto) {
     return this.concelhoService.update(+id, updateConcelhoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async remove(@Param('id') id: string) {
     return this.concelhoService.remove(+id);
   }
 }

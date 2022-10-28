@@ -59,11 +59,13 @@ export class CodigoPostal {
     @Column({default: ''})
     DesignacaoPostal: string;  
     
+    /* HAS A BUG INTO DATABASE - TODO: FIX DATABASE CONVERT
     @ManyToOne(type => Concelho, { eager: true, cascade: false, nullable: true })
     @JoinColumn(
         { name: 'CodigoConcelho', referencedColumnName: 'Codigo' }
     )    
     Concelho: Concelho;
+    */
 
     @ManyToOne(type => Distrito, { eager: true, cascade: false, nullable: true })
     @JoinColumn(

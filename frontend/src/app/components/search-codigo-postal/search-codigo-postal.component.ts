@@ -38,7 +38,7 @@ export class SearchCodigoPostalComponent {
         }
       );
     } else {
-      this.cttService.buscarMorada(this.morada).subscribe(      
+      this.cttService.buscarCodigoPostal(this.morada).subscribe(      
         (data: any) => {         
           this.CodigosPostais = data;
           this.loading.next(false);

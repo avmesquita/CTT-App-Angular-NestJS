@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Header } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { DistritoService } from './distrito.service';
 import { CreateDistritoDto } from './dto/create-distrito.dto';
@@ -10,24 +10,28 @@ export class DistritoController {
   constructor(private readonly distritoService: DistritoService) {}
 
   @Post()
-  create(@Body() createDistritoDto: CreateDistritoDto) {
+  @Header('Cache-Control', 'none')
+  async create(@Body() createDistritoDto: CreateDistritoDto) {
     return this.distritoService.create(createDistritoDto);
   }
 
   @Get()
-  findAll() {
+  @Header('Cache-Control', 'none')
+  async findAll() {
     return this.distritoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async findOne(@Param('id') id: string) {
     return this.distritoService.findOne(+id);
   }
 
   @Get('paginate/:page/:limit')
-  paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+  @Header('Cache-Control', 'none')
+  async paginate(
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -38,14 +42,26 @@ export class DistritoController {
     })
   }
 
+  @Get('find-text/:text')
+  @Header('Cache-Control', 'none')
+  async findText(
+    @Param('text') text: string = ''
+  ) {    
+    if (text === undefined || text === 'undefined' || text === null || text === '')
+      return this.distritoService.findAll();    
+    else
+      return this.distritoService.findDistritoName(text);      
+  }  
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDistritoDto: UpdateDistritoDto) {
+  @Header('Cache-Control', 'none')
+  async update(@Param('id') id: string, @Body() updateDistritoDto: UpdateDistritoDto) {
     return this.distritoService.update(+id, updateDistritoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async remove(@Param('id') id: string) {
     return this.distritoService.remove(+id);
   }
 }

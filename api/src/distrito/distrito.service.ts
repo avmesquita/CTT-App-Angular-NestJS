@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { from, map, Observable, switchMap } from 'rxjs';
-import { Repository, FindOneOptions, FindManyOptions } from 'typeorm';
+import { Repository, FindOneOptions, FindManyOptions, Like } from 'typeorm';
 
 import { CreateDistritoDto } from './dto/create-distrito.dto';
 import { UpdateDistritoDto } from './dto/update-distrito.dto';
@@ -42,6 +42,18 @@ export class DistritoService {
     }
     return from(this.distritoRepository.findOne(criteria));
   }
+
+  findDistritoName(name: string): Observable<Distrito[]> {
+    const criteria: FindManyOptions<Distrito> = {
+      select: [
+        'Id',
+        'Codigo',
+        'Nome'
+      ],
+      where: { Nome: Like('%' + name + '%')}
+    }
+    return from(this.distritoRepository.find(criteria));
+  }  
 
   update(id: number, updateDistritoDto: UpdateDistritoDto): Observable<Distrito> {
     return from(this.distritoRepository.update(id, updateDistritoDto)).pipe(

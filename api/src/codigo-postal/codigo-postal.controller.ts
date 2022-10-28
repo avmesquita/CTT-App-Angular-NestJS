@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Header } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CodigoPostalService } from './codigo-postal.service';
 import { CreateCodigoPostalDto } from './dto/create-codigo-postal.dto';
@@ -10,24 +10,28 @@ export class CodigoPostalController {
   constructor(private readonly codigoPostalService: CodigoPostalService) {}
 
   @Post()
-  create(@Body() createCodigoPostalDto: CreateCodigoPostalDto) {
+  @Header('Cache-Control', 'none')
+  async create(@Body() createCodigoPostalDto: CreateCodigoPostalDto) {
     return this.codigoPostalService.create(createCodigoPostalDto);
   }
 
   @Get()
-  findAll() {
+  @Header('Cache-Control', 'none')
+  async findAll() {
     return this.codigoPostalService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async findOne(@Param('id') id: string) {
     return this.codigoPostalService.findOne(+id);
   }
 
   @Get('paginate/:page/:limit')
-  paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+  @Header('Cache-Control', 'none')
+  async paginate(
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -38,14 +42,23 @@ export class CodigoPostalController {
     })
   }
 
+  @Get('cp/:text')
+  @Header('Cache-Control', 'none')
+  async cpext(
+    @Param('text') text: string = ''
+  ) {    
+    return this.codigoPostalService.findCP(text);
+  }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCodigoPostalDto: UpdateCodigoPostalDto) {
+  @Header('Cache-Control', 'none')
+  async update(@Param('id') id: string, @Body() updateCodigoPostalDto: UpdateCodigoPostalDto) {
     return this.codigoPostalService.update(+id, updateCodigoPostalDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Header('Cache-Control', 'none')
+  async remove(@Param('id') id: string) {
     return this.codigoPostalService.remove(+id);
   }
 }
