@@ -3,9 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  apiUrl: 'https://ctt-api-service.herokuapp.com'
-  //apiUrl: 'http://localhost:10000'
+  production: false,
+  apiUrl: 'http://localhost:3000'
 };
 
 /*

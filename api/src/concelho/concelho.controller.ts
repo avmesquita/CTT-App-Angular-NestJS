@@ -30,8 +30,8 @@ export class ConcelhoController {
   @Get('paginate/:page/:limit')
   @Header('Cache-Control', 'none')
   async paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -45,9 +45,12 @@ export class ConcelhoController {
   @Get('find-text/:text')
   @Header('Cache-Control', 'none')
   async cpext(
-    @Query('text') text: string    
-  ) {    
-    return this.concelhoService.findConcelhoName(text);
+    @Param('text') text: string = ''
+  ) {
+    if (text === undefined || text === 'undefined' || text === null || text === '')
+      return this.concelhoService.findAll();
+    else
+      return this.concelhoService.findConcelhoName(text);      
   }
 
   @Patch(':id')

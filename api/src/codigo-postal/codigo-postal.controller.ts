@@ -30,8 +30,8 @@ export class CodigoPostalController {
   @Get('paginate/:page/:limit')
   @Header('Cache-Control', 'none')
   async paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -42,13 +42,12 @@ export class CodigoPostalController {
     })
   }
 
-  @Get('cp/:cp/:ext')
+  @Get('cp/:text')
   @Header('Cache-Control', 'none')
   async cpext(
-    @Query('cp') cp: string,
-    @Query('ext') ext?: string
+    @Param('text') text: string = ''
   ) {    
-    return this.codigoPostalService.findCP(cp,ext);
+    return this.codigoPostalService.findCP(text);
   }
 
   @Patch(':id')

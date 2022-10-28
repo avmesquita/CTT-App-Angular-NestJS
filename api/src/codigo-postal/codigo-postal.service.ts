@@ -24,7 +24,17 @@ export class CodigoPostalService {
     return from(this.codigoPostalRepository.find());
   }
 
-  findCP(cp: string, ext: string): Observable<CodigoPostal[]> {
+  findCP(text: string): Observable<CodigoPostal[]> {
+
+    let cp = '';
+    let ext = '';
+    if (text.indexOf('-') > 0) {
+      cp = text.split('-')[0];
+      ext = text.split('-')[1];
+    }
+    if (ext === '') {
+      ext = ' ';    
+    }
     const criteria: FindManyOptions<CodigoPostal> = {
       select: [
         'Id',
@@ -58,13 +68,13 @@ export class CodigoPostalService {
      }
     } else {
       criteria.where = [ /* OR */
-        { NumeroCodigoPostal: Like('%' + cp + '%') },
-        { NumeroExtensaoCodigoPostal: Like('%' + cp + '%') },
-        { NomeCliente: Like('%' + cp + '%') },
-        { NomeLocalidade: Like('%' + cp + '%') },
-        { DesignacaoPostal: Like('%' + cp + '%') },
-        { ArteriaTipo: Like('%' + cp + '%') },
-        { ArteriaDesignacao: Like('%' + cp + '%') }
+        { NumeroCodigoPostal: Like('%' + text + '%') },
+        { NumeroExtensaoCodigoPostal: Like('%' + text + '%') },
+        { NomeCliente: Like('%' + text + '%') },
+        { NomeLocalidade: Like('%' + text + '%') },
+        { DesignacaoPostal: Like('%' + text + '%') },
+        { ArteriaTipo: Like('%' + text + '%') },
+        { ArteriaDesignacao: Like('%' + text + '%') }
       ];
     }
     

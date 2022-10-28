@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.setGlobalPrefix('api');
 
   const config = new DocumentBuilder()
@@ -15,7 +16,7 @@ async function bootstrap() {
   .addTag('apartado')
   .addTag('codigo-postal')
   .addTag('concelho')  
-  .addTag('distrito')
+  .addTag('distrito')  
   .build();
 
   const document = SwaggerModule.createDocument(app, config);

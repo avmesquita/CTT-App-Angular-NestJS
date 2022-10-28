@@ -30,8 +30,8 @@ export class DistritoController {
   @Get('paginate/:page/:limit')
   @Header('Cache-Control', 'none')
   async paginate(
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 10
+    @Param('page') page: number = 1,
+    @Param('limit') limit: number = 10
   ) {
     limit = limit > 100 ? 100 : limit;        
 
@@ -44,10 +44,13 @@ export class DistritoController {
 
   @Get('find-text/:text')
   @Header('Cache-Control', 'none')
-  async cpext(
-    @Query('text') text: string    
+  async findText(
+    @Param('text') text: string = ''
   ) {    
-    return this.distritoService.findDistritoName(text);
+    if (text === undefined || text === 'undefined' || text === null || text === '')
+      return this.distritoService.findAll();    
+    else
+      return this.distritoService.findDistritoName(text);      
   }  
 
   @Patch(':id')
