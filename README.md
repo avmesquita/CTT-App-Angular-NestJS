@@ -2,8 +2,8 @@
 Projeto de aplicativo completo para consulta de códigos postais de Portugal
 
 ## Definição
-* Criar um projeto de backend REST API com NestJS
-* Criar um projeto de frontend com ANGULAR a consumir o backend
+* Backend REST API com NestJS
+* Frontend com ANGULAR a consumir o backend
 * Aplicativo .net de geração da base de dados em sqlite (importado de https://github.io/avmesquita/CTT-Api)
 
 ## Backend Endpoints
